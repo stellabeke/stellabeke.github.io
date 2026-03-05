@@ -1,23 +1,428 @@
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>EZENWABEKE STELLA CHIDIEBERE | WDD130</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="#">Home</a>
-                <a href="wwr">Rafting Website</a>
-            </nav>
-        </header>
-        <main>
-            <img src="images/profile.webp" alt="EZENWABEKE STELLA" width="200">
-            <p> a young vibrant lady looking to take over the world</p>
-        </main>
-        <footer>
-            <p>&copy; 2025 🤓EZENWABEKE STELLA 🤓 Enugu 🤓Nigeria</p>
-        </footer>
-    </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stella Ezenwabeke — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a3a2e;
+    --sage:   #4a7c6a;
+    --mint:   #8fbfaf;
+    --cream:  #f5f0e8;
+    --warm:   #e8dfd0;
+    --gold:   #c9a96e;
+    --text:   #1e2820;
+    --muted:  #6b7c74;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,124,106,0.15);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.05em; color: var(--forest); }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--sage); }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+
+  .hero-left { background: var(--forest); display: flex; flex-direction: column; justify-content: flex-end; padding: 7rem 4rem 5rem; position: relative; }
+  .hero-left::after { content: ''; position: absolute; top: 0; right: -60px; bottom: 0; width: 120px; background: var(--forest); clip-path: polygon(0 0, 0% 100%, 100% 100%); z-index: 2; }
+
+  .hero-tag { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--cream); opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+  .hero-name em { font-style: italic; color: var(--mint); display: block; }
+
+  .hero-tagline { margin-top: 2rem; font-size: 0.9rem; line-height: 1.75; color: rgba(245,240,232,0.6); max-width: 340px; opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards; }
+
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 2.8rem; padding: 0.75rem 1.8rem; border: 1px solid var(--gold); color: var(--gold); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards; width: fit-content; }
+  .hero-cta:hover { background: var(--gold); color: var(--forest); }
+
+  .hero-right { background: var(--warm); display: flex; flex-direction: column; justify-content: center; padding: 7rem 4rem 5rem 6rem; }
+
+  .hero-stats { display: flex; flex-direction: column; gap: 2.5rem; opacity: 0; animation: fadeIn 1s ease 1s forwards; }
+
+  .stat-item { display: flex; align-items: flex-start; gap: 1.2rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(74,124,106,0.2); }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--sage); line-height: 1; min-width: 80px; }
+  .stat-label { font-size: 0.85rem; line-height: 1.6; color: var(--muted); padding-top: 0.2rem; }
+  .stat-label strong { display: block; color: var(--text); font-weight: 500; font-size: 0.9rem; margin-bottom: 0.2rem; }
+
+  section { padding: 6rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; color: var(--forest); margin-bottom: 3rem; }
+  .section-title em { font-style: italic; color: var(--sage); }
+
+  .about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .about-pull { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-style: italic; line-height: 1.6; color: var(--forest); border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-bottom: 2rem; }
+  .about-text { font-size: 0.93rem; line-height: 1.85; color: var(--muted); }
+  .about-text + .about-text { margin-top: 1rem; }
+
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .skill-chip { padding: 0.65rem 1rem; background: var(--cream); border: 1px solid rgba(74,124,106,0.2); font-size: 0.78rem; color: var(--forest); letter-spacing: 0.02em; transition: all 0.2s; cursor: default; }
+  .skill-chip:hover { background: var(--sage); color: white; border-color: var(--sage); }
+
+  .experience { background: var(--cream); }
+  .exp-timeline { position: relative; padding-left: 2rem; }
+  .exp-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--sage), transparent); }
+  .exp-item { position: relative; padding-left: 2rem; padding-bottom: 3.5rem; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+  .exp-item::before { content: ''; position: absolute; left: -2.4rem; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--cream); box-shadow: 0 0 0 2px var(--gold); }
+  .exp-meta { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+  .exp-role { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--forest); margin-bottom: 0.2rem; }
+  .exp-org { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 1rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .exp-bullets li { font-size: 0.88rem; line-height: 1.65; color: var(--muted); padding-left: 1.1rem; position: relative; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.75rem; }
+  .exp-tag { display: inline-block; margin-top: 0.8rem; padding: 0.3rem 0.8rem; background: rgba(74,124,106,0.1); color: var(--sage); font-size: 0.72rem; letter-spacing: 0.08em; border-radius: 2px; }
+
+  .impact { background: var(--forest); }
+  .impact .section-eyebrow { color: var(--gold); }
+  .impact .section-title { color: var(--cream); }
+  .impact .section-title em { color: var(--mint); }
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 1rem; }
+  .impact-card { background: rgba(255,255,255,0.05); padding: 2.5rem 2rem; border: 1px solid rgba(255,255,255,0.07); transition: background 0.3s; }
+  .impact-card:hover { background: rgba(255,255,255,0.1); }
+  .impact-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+  .impact-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(245,240,232,0.6); }
+  .impact-desc strong { display: block; color: var(--cream); font-weight: 500; margin-bottom: 0.3rem; }
+
+  .community { background: white; }
+  .community-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+  .community-card { padding: 2rem; background: var(--cream); border-top: 3px solid transparent; transition: border-color 0.3s, transform 0.3s; }
+  .community-card:hover { border-color: var(--sage); transform: translateY(-4px); }
+  .community-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .community-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--forest); margin-bottom: 0.6rem; }
+  .community-card p { font-size: 0.84rem; line-height: 1.7; color: var(--muted); }
+
+  .education { background: var(--warm); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .edu-card { background: white; padding: 2rem 2.2rem; border-left: 4px solid var(--sage); }
+  .edu-year { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+  .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--forest); margin-bottom: 0.3rem; }
+  .edu-school { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+  .edu-badge { display: inline-block; margin-top: 0.8rem; padding: 0.3rem 0.8rem; background: rgba(201,169,110,0.15); color: #9a7840; font-size: 0.72rem; letter-spacing: 0.06em; }
+
+  .contact { background: var(--forest); text-align: center; padding: 5rem 0; }
+  .contact .section-title { color: var(--cream); }
+  .contact .section-eyebrow { color: var(--gold); }
+  .contact-subtitle { font-size: 0.93rem; color: rgba(245,240,232,0.55); margin-top: -1.5rem; margin-bottom: 2.5rem; line-height: 1.75; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .contact-email { display: inline-block; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,169,110,0.4); padding-bottom: 0.2rem; transition: border-color 0.3s; }
+  .contact-email:hover { border-color: var(--gold); }
+  .contact-location { margin-top: 1.2rem; font-size: 0.82rem; color: rgba(245,240,232,0.4); letter-spacing: 0.06em; }
+
+  footer { background: #0f2219; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-size: 0.75rem; color: rgba(245,240,232,0.25); letter-spacing: 0.05em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 3rem 2rem 4rem; }
+    .hero-left { padding: 8rem 2rem 3rem; }
+    .about-grid, .impact-grid, .community-grid, .edu-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Stella Ezenwabeke</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Community · Health · Programme Coordination</div>
+    <h1 class="hero-name">Stella<br><em>Ezenwabeke</em></h1>
+    <p class="hero-tagline">Health professional and programme coordinator based in Ottawa. Four years spent working with health teams, government programmes, and business communities — making sure people have what they need, when they need it.</p>
+    <a href="#contact" class="hero-cta">Get in touch <span>→</span></a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">4+</div>
+        <div class="stat-label"><strong>Years of Experience</strong>In healthcare, government compliance, and community-facing programme work</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">17</div>
+        <div class="stat-label"><strong>Jurisdictions Coordinated</strong>Running outreach and educational programmes across regional government areas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">90+</div>
+        <div class="stat-label"><strong>Partners Engaged</strong>Built from scratch — 90% stayed active long-term</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">71%</div>
+        <div class="stat-label"><strong>Growth Delivered</strong>Revenue increase tied to better community engagement and adoption of new processes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <p class="section-eyebrow reveal">Who I Am</p>
+    <h2 class="section-title reveal">A background in health,<br><em>a focus on people</em></h2>
+    <div class="about-grid reveal">
+      <div class="about-left">
+        <p class="about-pull">"Most of my work has been about helping people find their footing in complicated situations — and making sure they're not doing it alone."</p>
+        <p class="about-text">My background is in public health and programme coordination. I've worked in clinics, government agencies, and business environments — and what's been consistent across all of it is the work with people: figuring out what they need, making resources that actually help, and building spaces where sharing knowledge feels natural.</p>
+        <p class="about-text" style="margin-top:1rem">I care about work that has real purpose behind it. Whether I was coordinating health teams at an airport clinic, running community communications across 17 local governments, or managing a network of 90+ business partners — what kept me going was knowing that the person on the other end was better off because of how the work was done.</p>
+        <p class="about-text" style="margin-top:1rem">Based in Ottawa, ON. Open to remote roles across Canada.</p>
+      </div>
+      <div class="about-right">
+        <div class="skills-grid">
+          <div class="skill-chip">Community Engagement</div>
+          <div class="skill-chip">Educational Content</div>
+          <div class="skill-chip">Event Facilitation</div>
+          <div class="skill-chip">Stakeholder Management</div>
+          <div class="skill-chip">Programme Design</div>
+          <div class="skill-chip">Peer Learning</div>
+          <div class="skill-chip">Data & KPI Reporting</div>
+          <div class="skill-chip">Cross-functional Teams</div>
+          <div class="skill-chip">Change Communications</div>
+          <div class="skill-chip">Health & Wellness</div>
+          <div class="skill-chip">Resource Development</div>
+          <div class="skill-chip">Process Improvement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="container">
+    <p class="section-eyebrow reveal">Career</p>
+    <h2 class="section-title reveal">Where I've worked,<br><em>and what I did there</em></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-meta">January 2024 – Present</div>
+        <div class="exp-role">Business Development Manager / Operations Lead</div>
+        <div class="exp-org">Jin Cheng — Enugu State, Nigeria</div>
+        <ul class="exp-bullets">
+          <li>Managed relationships with 90+ supplier and partner contacts — regular check-ins, clear expectations, and enough follow-through that 90% stayed active long-term.</li>
+          <li>Put together onboarding guides and process documentation when new partners joined the network, so they didn't have to figure things out from scratch.</li>
+          <li>Kept procurement, logistics, sales, and finance teams connected to each other and to the same project goals — much of the role was making sure the right people knew the right things at the right time.</li>
+          <li>Tracked progress against targets and reported back regularly — revenue grew 71% over eight months.</li>
+        </ul>
+        <span class="exp-tag">Partner Engagement · Operations · Communications</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">2023 – 2024</div>
+        <div class="exp-role">Head of Department, Compliance & Monitoring</div>
+        <div class="exp-org">Enugu State Waste Management Authority — Enugu, Nigeria</div>
+        <ul class="exp-bullets">
+          <li>Handled community-facing communications across 17 local government areas — writing differently for frontline workers, local contractors, and senior officials depending on what each group needed to know.</li>
+          <li>Built compliance guides, toolkits, and reference documents from the ground up so local teams could work through regulatory requirements without always needing to escalate for help.</li>
+          <li>Organised cross-sector briefings and coordination events — gathering feedback, sharing updates, and keeping different groups aligned around shared goals.</li>
+          <li>Set up monitoring systems to track adoption and flag gaps early, rather than finding out what wasn't working at the end of a reporting period.</li>
+        </ul>
+        <span class="exp-tag">Educational Resources · Community Outreach · Programme Management</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">2022 – 2023</div>
+        <div class="exp-role">Public Health Officer | Health Programme Coordinator</div>
+        <div class="exp-org">Akanu Ibiam International Airport — Enugu, Nigeria</div>
+        <ul class="exp-bullets">
+          <li>Coordinated health education and prevention programmes across a mixed community of practitioners, government agencies, and airport staff — focused on getting the right information to people in a format they'd actually use.</li>
+          <li>Wrote health education materials and intervention guides for frontline staff — plain language, structured for someone reading it quickly between other responsibilities.</li>
+          <li>Ran group discussions and joint planning sessions with practitioners and partner organisations, with the goal of getting people talking to each other rather than just receiving updates.</li>
+          <li>Managed a team of physicians, nurses, and statisticians day-to-day — coordinating workload and being consistent so people knew what to expect.</li>
+        </ul>
+        <span class="exp-tag">Health Education · Team Coordination · Practitioner Support</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">2021 – 2022</div>
+        <div class="exp-role">Laboratory Scientist II | Quality Assurance Coordinator</div>
+        <div class="exp-org">Abia State Ministry of Health — Abia, Nigeria</div>
+        <ul class="exp-bullets">
+          <li>Helped produce public health education materials — taking technical data and writing it in a way that community leaders and practitioners could actually work with.</li>
+          <li>Worked across healthcare providers and government offices to share findings and coordinate responses to public health priorities.</li>
+          <li>Supervised technical staff on quality and compliance processes — keeping standards consistent and catching issues before they grew.</li>
+        </ul>
+        <span class="exp-tag">Public Health · Quality Assurance · Community Education</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="impact" id="impact">
+  <div class="container">
+    <p class="section-eyebrow reveal">By the Numbers</p>
+    <h2 class="section-title reveal">Numbers that <em>mean something</em></h2>
+    <div class="impact-grid reveal">
+      <div class="impact-card">
+        <div class="impact-num">60%</div>
+        <div class="impact-desc"><strong>Environmental Improvement</strong>State cleanliness metrics improved across 17 jurisdictions — measured against government benchmarks over the course of the programme.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">71%</div>
+        <div class="impact-desc"><strong>Revenue Growth</strong>Monthly collections went from ₦7M to ₦12M — largely through better community adoption of new processes and more consistent follow-through.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">250%</div>
+        <div class="impact-desc"><strong>Capacity Increase</strong>Daily processing scaled to 35 tonnes after workflow changes and resource reallocation — on time, within the project scope.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">90+</div>
+        <div class="impact-desc"><strong>Partners Engaged</strong>Built the network from nothing. 90% converted to active, ongoing participants within the first month of the programme.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">80%</div>
+        <div class="impact-desc"><strong>Retention Rate</strong>Maintained by staying consistent, communicating honestly, and solving problems before they became reasons to disengage.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">17</div>
+        <div class="impact-desc"><strong>Areas Coordinated</strong>Educational outreach delivered across 17 local government areas, each with different teams and different starting points.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="community" id="approach">
+  <div class="container">
+    <p class="section-eyebrow reveal">How I Work</p>
+    <h2 class="section-title reveal">A few things that <em>matter to me</em></h2>
+    <div class="community-grid reveal">
+      <div class="community-card">
+        <div class="community-icon">🌱</div>
+        <h3>Resources That Get Used</h3>
+        <p>I write for the person who's busy and needs it to work the first time. Compliance guides, onboarding docs, practitioner resources — whatever it is, clear and usable matters more than thorough and unread.</p>
+      </div>
+      <div class="community-card">
+        <div class="community-icon">🤝</div>
+        <h3>Events That Create Conversation</h3>
+        <p>I've run briefings and community events across large, distributed groups. The goal is always the same: get people actually talking to each other, not just sitting through a presentation.</p>
+      </div>
+      <div class="community-card">
+        <div class="community-icon">📊</div>
+        <h3>Measuring What Matters</h3>
+        <p>I'd rather know something isn't working at week two than at the end of a quarter. I build simple tracking systems early and check them regularly — so there's something real to evaluate, not just good intentions.</p>
+      </div>
+      <div class="community-card">
+        <div class="community-icon">💬</div>
+        <h3>Writing for the Right Audience</h3>
+        <p>A government compliance update reads very differently than a newsletter for practitioners. Getting the tone right matters — and I've written both, and most things in between.</p>
+      </div>
+      <div class="community-card">
+        <div class="community-icon">🏥</div>
+        <h3>Health Is Where I Come From</h3>
+        <p>I've spent most of my career in and around healthcare — clinics, public health offices, alongside practitioners. I know the pressure they're under, and what kind of support actually makes a difference day to day.</p>
+      </div>
+      <div class="community-card">
+        <div class="community-icon">⚙️</div>
+        <h3>I Work Well With Ambiguity</h3>
+        <p>A lot of what I've built didn't come with a clear brief. I find that easier to work with, honestly — it's simpler to build something that fits when you're not retrofitting a template made for a different problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="education" id="education">
+  <div class="container">
+    <p class="section-eyebrow reveal">Education</p>
+    <h2 class="section-title reveal">Academic &amp; <em>professional training</em></h2>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="edu-year">2014 – 2019</div>
+        <div class="edu-degree">Bachelor of Science — Microbiology</div>
+        <div class="edu-school">University of Port Harcourt, Nigeria</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">Currently In Progress</div>
+        <div class="edu-degree">Project Management Professional (PMP)</div>
+        <div class="edu-school">Project Management Institute (PMI)</div>
+        <div class="edu-badge">Certification In Progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h2 class="section-title" style="margin-bottom:1rem">Open to<br><em>the right opportunity</em></h2>
+    <p class="contact-subtitle">Based in Ottawa and looking for remote roles in Canada — particularly in community management, health programmes, or practitioner-facing work.</p>
+    <a href="mailto:ezenwabekestella@gmail.com" class="contact-email">ezenwabekestella@gmail.com</a>
+    <p class="contact-location">📍 Ottawa, Ontario, Canada &nbsp;·&nbsp; Remote across Canada</p>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Stella Chidiebere Ezenwabeke</span>
+  <span>Ottawa, ON · Canada</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .exp-item').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.skills-grid .skill-chip, .impact-grid .impact-card, .community-grid .community-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.07}s`;
+  });
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '0.8rem 3rem' : '1.4rem 3rem';
+  });
+</script>
+</body>
 </html>
